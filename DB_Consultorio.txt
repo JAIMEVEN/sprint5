@@ -1,0 +1,106 @@
+CREATE TABLE IF NOT EXISTS `consultorio`.`paciente` (
+  `idpaciente` INT NOT NULL AUTO_INCREMENT,
+  `tipoDoc` VARCHAR(45) NOT NULL,
+  `documento` VARCHAR(45) NOT NULL,
+  `nombres` VARCHAR(60) NOT NULL,
+  `apellidos` VARCHAR(40) NOT NULL,
+  `genero` VARCHAR(5) NOT NULL,
+  `telefono` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(60) NOT NULL,
+  PRIMARY KEY (`idpaciente`),
+  UNIQUE INDEX `documento_UNIQUE` (`documento` ASC))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `consultorio`.`horario` (
+  `idhorario` INT NOT NULL AUTO_INCREMENT,
+  `dias` VARCHAR(60) NOT NULL,
+  `horaIngreso` TIME NOT NULL,
+  `horaSalida` TIME NOT NULL,
+  PRIMARY KEY (`idhorario`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `consultorio`.`medico` (
+  `idmedico` INT NOT NULL AUTO_INCREMENT,
+  `tipoDoc` VARCHAR(20) NOT NULL,
+  `documento` VARCHAR(20) NOT NULL,
+  `nombre` VARCHAR(45) NOT NULL,
+  `primerApellido` VARCHAR(45) NOT NULL,
+  `genero` VARCHAR(5) NOT NULL,
+  `idHorario` INT NOT NULL,
+  PRIMARY KEY (`idmedico`),
+  INDEX `FK_horario_idx` (`idHorario` ASC),
+  UNIQUE INDEX `documento_UNIQUE` (`documento` ASC),
+  CONSTRAINT `FK_horario`
+    FOREIGN KEY (`idHorario`)
+    REFERENCES `consultorio`.`horario` (`idhorario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `consultorio`.`cita` (
+  `idcita` INT NOT NULL AUTO_INCREMENT,
+  `fecha` DATE NOT NULL,
+  `hora` TIME NOT NULL,
+  `idPaciente` INT NOT NULL,
+  `idMedico` INT NOT NULL,
+  `idMedicamento` INT NOT NULL,
+  PRIMARY KEY (`idcita`),
+  INDEX `FK_docPaciente_idx` (`idPaciente` ASC),
+  INDEX `FK_docMedico_idx` (`idMedico` ASC),
+  CONSTRAINT `FK_docPaciente`
+    FOREIGN KEY (`idPaciente`)
+    REFERENCES `consultorio`.`paciente` (`idpaciente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_docMedico`
+    FOREIGN KEY (`idMedico`)
+    REFERENCES `consultorio`.`medico` (`idmedico`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `consultorio`.`medicamento` (
+  `idmedicamento` INT NOT NULL AUTO_INCREMENT,
+  `referencia` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(30) NOT NULL,
+  `laboratorio` VARCHAR(25) NOT NULL,
+  `tipo` VARCHAR(20) NOT NULL,
+  `cantidad` FLOAT NOT NULL,
+  PRIMARY KEY (`idmedicamento`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `consultorio`.`medicamento_cita` (
+  `idMedicamento` INT NOT NULL AUTO_INCREMENT,
+  `idCita` INT NOT NULL,
+  `cantidadFormulada` FLOAT NOT NULL,
+  PRIMARY KEY (`idMedicamento`, `idCita`),
+  INDEX `fk_medicamento_has_cita_cita1_idx` (`idCita` ASC),
+  INDEX `fk_medicamento_has_cita_medicamento1_idx` (`idMedicamento` ASC),
+  CONSTRAINT `fk_medicamento_has_cita_medicamento1`
+    FOREIGN KEY (`idMedicamento`)
+    REFERENCES `consultorio`.`medicamento` (`idmedicamento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_medicamento_has_cita_cita1`
+    FOREIGN KEY (`idCita`)
+    REFERENCES `consultorio`.`cita` (`idcita`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `consultorio`.`administrador` (
+  `idadministrador` INT NOT NULL AUTO_INCREMENT,
+  `documento` VARCHAR(20) NOT NULL,
+  `Nombres` VARCHAR(45) NOT NULL,
+  `Apellidos` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `usuario` VARCHAR(45) NOT NULL,
+  `contrasena` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idadministrador`),
+  UNIQUE INDEX `documento_UNIQUE` (`documento` ASC))
+ENGINE = InnoDB;
+
+INSERT INTO `paciente` VALUES (1,'CC','1097147258','Carlos Andres','Castro Merchan','M','3207397906','carloscastro@hotmail.com');
+INSERT INTO `paciente` VALUES (2,'CC','1097123456','Camilo Antonio','Roman Suarez','M','3202265473','camiloroman@hotmail.com');
+
+

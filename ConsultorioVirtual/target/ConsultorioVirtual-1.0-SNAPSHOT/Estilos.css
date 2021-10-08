@@ -1,0 +1,74 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 30/09/2021, 8:57:02 p. m.
+    Author     : andre
+*/
+body{
+    width: 900px; /*ancho de la pagina*/
+    margin: auto; /*centrar la pagina*/
+    background-color: aquamarine; /*color de la pagina*/    
+}
+
+h1{ /*estilos para la etiqueta h1*/
+    background-color: cadetblue;
+    color: aliceblue;
+    text-align: center;
+}
+
+h2{ /*estilos para la etiqueta h1*/    
+    color: green;
+    text-align: center;
+}
+
+div li{/*para ordenar de manera horizontal los enlaces a las otras paginas*/
+    display: inline-block;
+    padding: 5px; 
+    margin: auto;    
+}
+
+.centro { /*Con este centramos las listas ul y li de los enlaces a las otras paginas*/
+    text-align: center;
+}
+.centro ul {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    /* For IE, the outcast */
+    zoom:1;
+    *display: inline;
+}
+.centro li {
+    float: left;
+    padding: 2px 5px;      
+}
+
+.menuEnlaces{/*aplicamos estilos al menu de los enlaces a otras paginas*/
+    font-size: x-large; /*agrandamos la letra*/    
+}
+
+table.centrar{
+    margin: auto;
+}
+
+td{/* Todas las celdas de la tabla ... */
+    border: black solid 1px; /* tienen un borde de 1 píxel */
+}
+
+thead{
+    border: black solid 1px;
+}
+
+.form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+

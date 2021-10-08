@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS `paciente` (
+  `idpaciente` INT NOT NULL,
+  `tipoDoc` VARCHAR(45) NOT NULL,
+  `documento` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(60) NOT NULL,
+  `primerApellido` VARCHAR(40) NOT NULL,
+  `segundo_apellido` VARCHAR(40) NULL,
+  `telefono` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(60) NOT NULL,
+  PRIMARY KEY (`documento`))
+ENGINE = InnoDB;
